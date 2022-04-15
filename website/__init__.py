@@ -7,7 +7,7 @@ DB_NAME = "database.db"
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'ml;k pCFGHVJHBNwezgdhxgfUIGY TRw32jchv,jhbk;iopooi0p o8i67ru5e4y">:LPKJUIYT'
+    app.config['SECRET_KEY'] = 'nabhjkdsvuscbhkjnkbfacjk akavssdoib j'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
     
@@ -17,7 +17,7 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
     
-    from .models import User, Songs, Songs_Per_User
+    from .models import User, Songs, User_Song_List
     
     create_db(app)
     
