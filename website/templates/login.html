@@ -2,12 +2,19 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<h1>LOGIN PAGE</h1>
-{% if boolean == True %}
-  It is true
-{% else %}
-  Not true
-{% endif %}
+<form method="POST">
+  <h3 align="center">Login</h3>
 
-{{ password }}
-{% endblock content %}
+  <div class="form-group">
+    <label for="email">Email Address</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"/>
+  </div>
+
+  <div class="form-group">
+    <label for="password1">Password</label>
+    <input type="password" class="form-control" id="password1" name="password1" placeholder="Enter password"/>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Login</button>
+</form>
+{% endblock %}
