@@ -14,13 +14,44 @@ CREATE TABLE Songs(
 );
 
 CREATE TABLE `User`(
-	user_id	INTEGER NOT NULL UNIQUE PRIMARY KEY,
+	user_id	INTEGER NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
     username VARCHAR(255),
     `password` VARCHAR(255),
     email VARCHAR(255),
     bio VARCHAR(250)
 );
 
+
+CREATE TABLE Playlists(
+	playlist_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    playlist_name VARCHAR(255),
+    user_id	INTEGER,
+    FOREIGN KEY (user_id) REFERENCES `User`(user_id)
+);
+
+CREATE TABLE Playlists_Songs(
+	row_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    song_id	INTEGER,
+    playlist_id INTEGER,
+    FOREIGN KEY (song_id) REFERENCES Songs(song_id),
+    FOREIGN KEY (playlist_id) REFERENCES Playlists(playlist_id)
+);
+
+CREATE TABLE Genres(
+	genre_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    genre_name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Album(
+	album_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    album_name VARCHAR(31) NOT NULL,
+    release_date INTEGER NOT NULL
+);
+
+CREATE TABLE Artists(
+	artist_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    artist_name VARCHAR(255) NOT NULL
+);
 
 
 INSERT INTO Songs(SONG,ARTIST,GENRE,ALBUM,ALBUM_DATE,DURATION,LYRICS) VALUES ('Kryptonite','3 Doors Down','Alternative Rock','The Better Life',2000,'3:53',NULL);
@@ -73,5 +104,6 @@ INSERT INTO Songs(SONG,ARTIST,GENRE,ALBUM,ALBUM_DATE,DURATION,LYRICS) VALUES ('W
 INSERT INTO Songs(SONG,ARTIST,GENRE,ALBUM,ALBUM_DATE,DURATION,LYRICS) VALUES ('Umrumda Değil','UZI','Turkish Trap','Kan',2021,'3:05',NULL);
 INSERT INTO Songs(SONG,ARTIST,GENRE,ALBUM,ALBUM_DATE,DURATION,LYRICS) VALUES ('Wild Child','W.A.S.P.','Glam Metal','The Last Command',1985,'5:12',NULL);
 INSERT INTO Songs(SONG,ARTIST,GENRE,ALBUM,ALBUM_DATE,DURATION,LYRICS) VALUES ('Still of the Night','Whitesnake','Glam Metal','Whitesnake',1987,'6:37',NULL);
+
 
 
