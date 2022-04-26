@@ -15,7 +15,7 @@ CREATE TABLE Songs(
 );
 
 -- Create Users Table - Contains user info
-CREATE TABLE `User`(
+CREATE TABLE Users(
 	user_id	INTEGER NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
     username VARCHAR(255),
     `password` VARCHAR(255),
@@ -28,7 +28,7 @@ CREATE TABLE Playlists(
 	playlist_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
     playlist_name VARCHAR(255),
     user_id	INTEGER,
-    FOREIGN KEY (user_id) REFERENCES `User`(user_id)
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
 -- Create Playlists_Songs Table - Contains playlists and the songs stored within them
