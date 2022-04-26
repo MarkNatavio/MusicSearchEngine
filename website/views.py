@@ -16,6 +16,11 @@ def home():
 def about():
   return render_template("about.html", user=current_user)
 
+@views.route('/search', methods=['GET', 'POST'])
+@login_required
+def search():
+  return render_template("search.html", user=current_user)
+
 @views.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
