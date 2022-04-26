@@ -5,10 +5,10 @@ USE MusicDB;
 -- Create Songs Table - Contains Songs info
 CREATE TABLE Songs(
    song_id   INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY
-  ,SONG       VARCHAR(26) NOT NULL
-  ,ARTIST     VARCHAR(15) NOT NULL
-  ,GENRE      VARCHAR(24) NOT NULL
-  ,ALBUM      VARCHAR(31) NOT NULL
+  ,SONG       VARCHAR(255) NOT NULL
+  ,ARTIST     VARCHAR(255) NOT NULL
+  ,GENRE      VARCHAR(255) NOT NULL
+  ,ALBUM      VARCHAR(255) NOT NULL
   ,ALBUM_DATE INTEGER  NOT NULL
   ,DURATION   VARCHAR(4) NOT NULL
   ,LYRICS     TEXT
@@ -20,7 +20,7 @@ CREATE TABLE Users(
     username VARCHAR(255),
     `password` VARCHAR(255),
     email VARCHAR(255),
-    bio VARCHAR(250)
+    bio VARCHAR(255)
 );
 
 -- Create Playlists Table - Conntains user playlist info

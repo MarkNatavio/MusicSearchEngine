@@ -23,7 +23,7 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
     
-    from .models import User, Note, Songs, User_Song_List
+    from .models import Users, Note, Songs, Artists, Genres, Albums, Playlists, Playlists_Songs
     
     create_db(app)
     
@@ -33,7 +33,7 @@ def create_app():
     
     @login_manager.user_loader
     def load_user(id):
-        return User.query.get(int(id))
+        return Users.query.get(int(id))
     
     return app
 
