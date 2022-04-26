@@ -31,29 +31,24 @@ class Songs(db.Model):
   lyrics = db.Column(db.Text)
 
 
-class Note(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.String(10000))
-    date = db.Column(db.DateTime(timezone=True), default=func.now())
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-
-
 class Users(db.Model, UserMixin):
-  id = db.Column(db.Integer, primary_key=True)
+  user_id = db.Column(db.Integer, primary_key=True)
   username = db.Column(db.String(255))
   password = db.Column(db.String(255))
   email = db.Column(db.String(255), unique=True)
   bio = db.Column(db.String(255))
-  notes = db.relationship('Note')
+  
+  def get_id(self):
+    return self.user_id
 
 
 class Playlists(db.Model):
   playlist_id = db.Column(db.Integer, primary_key=True)
   playlist_name = db.Column(db.String(255))
-  user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+  user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 
   
 class Playlists_Songs(db.Model):
   row_id = db.Column(db.Integer, primary_key=True)
   song_id = db.Column(db.Integer, db.ForeignKey('songs.song_id'))
-  user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+  playlist_id = db.Column(db.Integer, db.ForeignKey('playlists.playlist_id'))
