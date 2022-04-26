@@ -24,3 +24,8 @@ def search():
 @login_required
 def profile():
   return render_template("profile.html", user=current_user)
+
+@views.route('/info', methods=['GET', 'POST'])
+@login_required
+def info():
+  return render_template("info.html", user=current_user)

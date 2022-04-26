@@ -13,7 +13,6 @@ def create_app():
     connection = "mysql+pymysql://{0}:{1}@{2}/{3}".format('root', 'password1234', 'localhost', 'MusicDB', pool_size=25, max_overflow=0)
     app.config['SQLALCHEMY_DATABASE_URI'] = connection    
     
-    # app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db = SQLAlchemy(app)
     db.init_app(app)
     
@@ -24,8 +23,6 @@ def create_app():
     app.register_blueprint(auth, url_prefix='/')
     
     from .models import Users, Songs, Artists, Genres, Albums, Playlists, Playlists_Songs
-    
-    # create_db(app)
     
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
