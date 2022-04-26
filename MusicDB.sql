@@ -2,6 +2,7 @@ DROP SCHEMA IF EXISTS MusicDB;
 CREATE DATABASE MusicDB;
 USE MusicDB;
 
+-- Create Songs Table - Contains Songs info
 CREATE TABLE Songs(
    song_id   INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY
   ,SONG       VARCHAR(26) NOT NULL
@@ -13,6 +14,7 @@ CREATE TABLE Songs(
   ,LYRICS     TEXT
 );
 
+-- Create Users Table - Contains user info
 CREATE TABLE `User`(
 	user_id	INTEGER NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
     username VARCHAR(255),
@@ -21,7 +23,7 @@ CREATE TABLE `User`(
     bio VARCHAR(250)
 );
 
-
+-- Create Playlists Table - Conntains user playlist info
 CREATE TABLE Playlists(
 	playlist_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
     playlist_name VARCHAR(255),
@@ -29,6 +31,7 @@ CREATE TABLE Playlists(
     FOREIGN KEY (user_id) REFERENCES `User`(user_id)
 );
 
+-- Create Playlists_Songs Table - Contains playlists and the songs stored within them
 CREATE TABLE Playlists_Songs(
 	row_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
     song_id	INTEGER,
@@ -37,21 +40,8 @@ CREATE TABLE Playlists_Songs(
     FOREIGN KEY (playlist_id) REFERENCES Playlists(playlist_id)
 );
 
-CREATE TABLE Genres(
-	genre_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    genre_name VARCHAR(255) NOT NULL
-);
 
-CREATE TABLE Album(
-	album_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    album_name VARCHAR(31) NOT NULL,
-    release_date INTEGER NOT NULL
-);
-
-CREATE TABLE Artists(
-	artist_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    artist_name VARCHAR(255) NOT NULL
-);
+-- =======================================================================================================================
 
 
 INSERT INTO Songs(SONG,ARTIST,GENRE,ALBUM,ALBUM_DATE,DURATION,LYRICS) VALUES ('Kryptonite','3 Doors Down','Alternative Rock','The Better Life',2000,'3:53',NULL);
@@ -105,5 +95,52 @@ INSERT INTO Songs(SONG,ARTIST,GENRE,ALBUM,ALBUM_DATE,DURATION,LYRICS) VALUES ('U
 INSERT INTO Songs(SONG,ARTIST,GENRE,ALBUM,ALBUM_DATE,DURATION,LYRICS) VALUES ('Wild Child','W.A.S.P.','Glam Metal','The Last Command',1985,'5:12',NULL);
 INSERT INTO Songs(SONG,ARTIST,GENRE,ALBUM,ALBUM_DATE,DURATION,LYRICS) VALUES ('Still of the Night','Whitesnake','Glam Metal','Whitesnake',1987,'6:37',NULL);
 
+-- Creating Albums Table - Contains Album Info
+CREATE TABLE Album AS (SELECT DISTINCT(ALBUM), ALBUM_DATE, ARTIST FROM Songs);
+CREATE TABLE Albums AS (SELECT ROW_NUMBER() OVER() as album_id, ALBUM, ALBUM_DATE, ARTIST FROM Album);
+DROP TABLE Album;
+
+-- Add primary key to Albums table
+ALTER TABLE Albums ADD PRIMARY KEY (album_id);
+ALTER TABLE Albums MODIFY album_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- Changing Album name in songs table into Album_ID according to the Albums table and setting up foreign key connection with Songs Table
+UPDATE Songs t1, Albums t2 SET t1.ALBUM = t2.album_id WHERE t1.ALBUM = t2.ALBUM;
+ALTER TABLE Songs MODIFY ALBUM INTEGER NOT NULL;
+ALTER TABLE Songs ADD FOREIGN KEY(ALBUM) REFERENCES Albums(album_id);
 
 
+-- =======================================================================================================================
+
+
+-- Creating Genres table - Contains Genre Types
+CREATE TABLE Genre AS (SELECT DISTINCT(GENRE) FROM Songs);
+CREATE TABLE Genres AS (SELECT ROW_NUMBER() OVER() as genre_id, GENRE FROM Genre);
+DROP TABLE Genre;
+
+-- Add primary key to Genres table
+ALTER TABLE Genres ADD PRIMARY KEY (genre_id);
+ALTER TABLE Genres MODIFY genre_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- Chaning Genre name in songs table into genre_id according to the Genres table and setting up foreign key connection
+UPDATE Songs t1, Genres t2 SET t1.GENRE = t2.genre_id WHERE t1.GENRE = t2.GENRE;
+ALTER TABLE Songs MODIFY GENRE INTEGER NOT NULL;
+ALTER TABLE Songs ADD FOREIGN KEY(GENRE) REFERENCES Genres(genre_id);
+
+
+-- =======================================================================================================================
+
+
+-- Creating Artists table - Contains Artist Info
+CREATE TABLE Artist AS (SELECT DISTINCT(ARTIST) FROM Songs);
+CREATE TABLE Artists AS (SELECT ROW_NUMBER() OVER() as artist_id, ARTIST FROM Artist);
+DROP TABLE Artist;
+
+-- Add primary key to albums
+ALTER TABLE Artists ADD PRIMARY KEY (artist_id);
+ALTER TABLE Artists MODIFY artist_id INTEGER NOT NULL AUTO_INCREMENT;
+
+-- Chaning Artist name in songs table into genre_id according to the Artists table and setting up foreign key connection
+UPDATE Songs t1, Artists t2 SET t1.ARTIST = t2.artist_id WHERE t1.ARTIST = t2.ARTIST;
+ALTER TABLE Songs MODIFY ARTIST INTEGER NOT NULL;
+ALTER TABLE Songs ADD FOREIGN KEY(ARTIST) REFERENCES Artists(artist_id);
