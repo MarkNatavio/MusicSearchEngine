@@ -94,7 +94,7 @@ INSERT INTO Songs(SONG,ARTIST,GENRE,ALBUM,ALBUM_DATE,DURATION,LYRICS) VALUES ('W
 INSERT INTO Songs(SONG,ARTIST,GENRE,ALBUM,ALBUM_DATE,DURATION,LYRICS) VALUES ('Umrumda Değil','UZI','Turkish Trap','Kan',2021,'3:05',NULL);
 INSERT INTO Songs(SONG,ARTIST,GENRE,ALBUM,ALBUM_DATE,DURATION,LYRICS) VALUES ('Wild Child','W.A.S.P.','Glam Metal','The Last Command',1985,'5:12',NULL);
 INSERT INTO Songs(SONG,ARTIST,GENRE,ALBUM,ALBUM_DATE,DURATION,LYRICS) VALUES ('Still of the Night','Whitesnake','Glam Metal','Whitesnake',1987,'6:37',NULL);
-INSERT INTO Songs(SONG,ARTIST,GENRE,ALBUM,ALBUM_DATE,DURATION,LYRICS) VALUES ('Dynamite','BTS','Disco-pop','Dynamite Remix',2020, '3:19', 'Cause I-I-I'm in the stars tonight
+INSERT INTO Songs(SONG,ARTIST,GENRE,ALBUM,ALBUM_DATE,DURATION,LYRICS) VALUES ('Dynamite','BTS','Disco-pop','Dynamite Remix',2020, '3:19', 'Cause I-I-Im in the stars tonight
 So watch me bring the fire and set the night alight
 Shoes on, get up in the morn
 Cup of milk, lets rock and roll
@@ -110,7 +110,7 @@ Yeah, this beat cha-ching like money, huh
 Disco overload, Im into that, Im good to go
 Im diamond, you know I glow up
 Hey, so lets go
-Cause I-I-I'm in the stars tonight
+Cause I-I-Im in the stars tonight
 So watch me bring the fire and set the night alight (hey)
 Shining through the city with a little funk and soul
 So Ima light it up like dynamite, whoa oh oh
@@ -126,8 +126,8 @@ This is getting heavy
 Can you hear the bass boom? Im ready (woo hoo)
 Life is sweet as honey
 Yeah, this beat cha-ching like money
-Disco overload, I'm into that, Im good to go
-I'm diamond, you know I glow up
+Disco overload, Im into that, Im good to go
+Im diamond, you know I glow up
 Lets go
 Cause I-I-Im in the stars tonight
 So watch me bring the fire and set the night alight (hey)
@@ -152,7 +152,7 @@ So Ima light it up like dynamite (this is ah)
 Cause I-I-Im in the stars tonight
 So watch me bring the fire and set the night alight (alight, oh)
 Shining through the city with a little funk and soul
-So I'ma light it up like dynamite, whoa (light it up like dynamite)
+So Ima light it up like dynamite, whoa (light it up like dynamite)
 Dy-na-na-na, na-na, na-na-na, na-na-na, life is dynamite
 Dy-na-na-na, na-na, na-na-na, na-na-na, life is dynamite
 Shining through the city with a little funk and soul
