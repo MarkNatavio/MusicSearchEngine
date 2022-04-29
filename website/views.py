@@ -1,8 +1,9 @@
-from flask import Blueprint, render_template, request, flash, jsonify
+from crypt import methods
+from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_required, current_user
 from . import db
 import json
-from .models import Genres, Songs
+from .models import Users, Playlists, Playlists_Songs, Genres, Songs, Albums
 
 views = Blueprint('views', __name__)
 
@@ -19,11 +20,12 @@ def about():
 @views.route('/search', methods=['GET', 'POST'])
 @login_required
 def search():
-  if request.method == 'GET':
-    genre = request.form.get(Genres)
-    print(genre)
+  if request.method == 'POST':
+    chosen_genre = request.form.get('genre_button')
+    songs_genre_filtered = Songs.query.filter(Songs.genre == chosen_genre)
+    return render_template("search.html", user=current_user, genres=Genres.query.all(), songs=songs_genre_filtered)
   
-  return render_template("search.html", user=current_user, data=genre)
+  return render_template("search.html", user=current_user, genres=Genres.query.all(), songs=Songs.query.all())
 
 @views.route('/profile', methods=['GET', 'POST'])
 @login_required

@@ -26,7 +26,7 @@ class Songs(db.Model):
   artist = db.Column(db.Integer, db.ForeignKey('artists.artist_id'))
   genre = db.Column(db.Integer, db.ForeignKey('genres.genre_id'))
   album = db.Column(db.Integer, db.ForeignKey('albums.album_id'))
-  release_date = db.Column(db.Integer)
+  album_date = db.Column(db.Integer)
   duration = db.Column(db.String(4))
   lyrics = db.Column(db.Text)
 
