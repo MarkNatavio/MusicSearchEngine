@@ -27,7 +27,7 @@
       <div class="row text-center">
         <div class="btn-group pre-scrollable" role"group" id="genres">
           {% for genre in genres %}        
-            <button type="button" class="btn btn-secondary" name="genre_button" value={{ genre.genre_id }}> {{ genre.genre }} </button>  
+            <button class="btn btn-secondary" name="genre_button" value={{ genre.genre_id }} onclick="return value"> {{ genre.genre }} </button>  
           {% endfor %}
         </div>
       </div>
@@ -37,7 +37,7 @@
   
   <table>
     {% for item in songs %}
-    <tr>
+    <tr >
       <th> Song: </th> <td> {{item.song}} </td>
       <th> Artist: </th> <td> {{item.artist}} </td>
       <th> Genre: </th> <td> {{item.genre}} </td>
@@ -47,5 +47,4 @@
     </tr>
     {% endfor %}
   </table>
-  
 {% endblock content %}

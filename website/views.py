@@ -20,6 +20,11 @@ def about():
 @views.route('/search', methods=['GET', 'POST'])
 @login_required
 def search():
+  if request.method == 'POST':
+    chosen_genre = request.form.get('genre_button')
+    songs_genre_filtered = Songs.query.filter(Songs.genre == chosen_genre)
+    return render_template("search.html", user=current_user, genres=Genres.query.all(), songs=songs_genre_filtered)
+  
   return render_template("search.html", user=current_user, genres=Genres.query.all(), songs=Songs.query.all())
 
 @views.route('/profile', methods=['GET', 'POST'])
