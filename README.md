@@ -9,10 +9,14 @@ Make you have install the following modules: pymysql, flask, flask-sqlalchemy, c
 
 if you do not have these modules use the commands below to install:
 
-pip install flask
-pip install flask-sqlalchemy
-pip install cryptography
-pip install flask-login
-pip install pymysql
+-- pip install flask
+
+-- pip install flask-sqlalchemy
+
+-- pip install cryptography
+
+-- pip install flask-login
+
+-- pip install pymysql
 
 Download the project file from github open it and run main.py 
