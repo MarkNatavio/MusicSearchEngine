@@ -18,6 +18,18 @@
 
     <title>{% block title %}Default{% endblock %} </title>
     {% block details %} {% endblock %}
+
+    <style>
+      body{
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      footer{
+        padding-top: 50px;
+        margin-top: auto;
+      }
+    </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -65,7 +77,8 @@
 
     <div class="container">{% block content %} {% endblock %}</div>
     
-    <style media="screen">
+    <style>
+ 
       body {
           font: 1em/150% verdana, arial, helvetica, sans-serif;
        }
@@ -80,6 +93,8 @@
           color:  #999d9f;
        }
       
+      
+
       #footer div {
           display: table-cell;
           width: 33.333%;
