@@ -21,11 +21,14 @@ def about():
 @login_required
 def search():
   chosen_genre = request.form.get('genre_button')
-  if chosen_genre:
+  search_keyword = request.args.get('searchTextField')
+  songs_genre_filtered = Songs.query.all()
+  if chosen_genre: # search by genre
     songs_genre_filtered = Songs.query.filter(Songs.genre == chosen_genre)
-    return render_template("search.html", user=current_user, genres=Genres.query.all(), songs=songs_genre_filtered)
-  
-  return render_template("search.html", user=current_user, genres=Genres.query.all(), songs=Songs.query.all())
+  elif search_keyword: # search by keyword
+    songs_genre_filtered = Songs.query.filter(Songs.song.contains(search_keyword))
+    
+  return render_template("search.html", user=current_user, genres=Genres.query.all(), songs=songs_genre_filtered)
 
 @views.route('/profile', methods=['GET', 'POST'])
 @login_required
