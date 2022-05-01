@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, request, flash, jsonify, redirect,
 from flask_login import login_required, current_user
 from . import db
 import json
-from .models import Users, Playlists, Playlists_Songs, Genres, Songs, Albums
+from .models import Artists, Playlists, Playlists_Songs, Genres, Songs, Albums
 
 views = Blueprint('views', __name__)
 
@@ -22,20 +22,31 @@ def about():
 def search():
   chosen_genre = request.form.get('genre_button')
   search_keyword = request.args.get('searchTextField')
-  songs_genre_filtered = Songs.query.all()
+  testing = request.form.get('song_selected')
+  
+  songs_genre_filtered = Songs.query.all()  
+
   if chosen_genre: # search by genre
+    print(chosen_genre)
     songs_genre_filtered = Songs.query.filter(Songs.genre == chosen_genre)
   elif search_keyword: # search by keyword
+    print(search_keyword)
     songs_genre_filtered = Songs.query.filter(Songs.song.contains(search_keyword))
-    
-  return render_template("search.html", user=current_user, genres=Genres.query.all(), songs=songs_genre_filtered)
+  elif testing:
+    return info(testing)
+  
+  return render_template("search.html", user=current_user, genres=Genres.query.all(), artists=Artists.query.all(), songs=songs_genre_filtered)
+
+
+@views.route('/info', methods=['GET', 'POST'])
+@login_required
+def info(id):
+  print(id)
+  song_selected = Songs.query.filter(Songs.song_id == id).first()
+  return render_template("info.html", user=current_user, song=song_selected, genres=Genres.query.all(), artists=Artists.query.all(), albums=Albums.query.all())
+
 
 @views.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
   return render_template("profile.html", user=current_user)
-
-@views.route('/info', methods=['GET', 'POST'])
-@login_required
-def info():
-  return render_template("info.html", user=current_user)
