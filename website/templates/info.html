@@ -2,5 +2,12 @@
 {% block title %}Info{% endblock %}
 
 {% block content %}
-<h1>INFO PAGE</h1>
+<h1> {% print(song.song) %}</h1>
+<p> {% print(genres[song.genre-1].genre) %}</p>
+<p> {% print(artists[song.artist-1].artist) %}</p>
+<p> {% print(song.duration) %}</p>
+<p> {% print(albums[song.album-1].album) %}</p>
+{% if song.lyrics %}
+  <p> {% print(song.lyrics)%} </p>
+{% endif %}
 {% endblock content %}
