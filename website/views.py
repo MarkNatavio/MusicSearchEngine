@@ -26,14 +26,16 @@ def search():
   
   songs_genre_filtered = Songs.query.all()  
 
-  if chosen_genre: # search by genre
+  if testing: # go to song info
+    print(testing)
+    return info(testing)
+  elif chosen_genre: # search by genre
     print(chosen_genre)
     songs_genre_filtered = Songs.query.filter(Songs.genre == chosen_genre)
   elif search_keyword: # search by keyword
     print(search_keyword)
     songs_genre_filtered = Songs.query.filter(Songs.song.contains(search_keyword))
-  elif testing:
-    return info(testing)
+  
   
   return render_template("search.html", user=current_user, genres=Genres.query.all(), artists=Artists.query.all(), songs=songs_genre_filtered)
 
