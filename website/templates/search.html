@@ -3,6 +3,27 @@
 
 {% block details %} 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, form:th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+  td{
+    cursor:pointer;
+  }
+  </style>
 {% endblock %}
 
 {% block content %}
@@ -28,17 +49,23 @@
   
   <hr/>
 
-  <table>
-    {% for item in songs %}
-    <tr>
-      <th> ID: </th> <td> {{item.song_id}} </td>
-      <th> Song: </th> <td> {{item.song}} </td>
-      <th> Artist: </th> <td> {{item.artist}} </td>
-      <th> Genre: </th> <td> {{item.genre}} </td>
-      <th> Album: </th> <td> {{item.album}} </td>
-      <th> Release Date: </th> <td> {{item.album_date}} </td>
-      <th> Duration: </th> <td> {{item.duration}} </td>
-    </tr>
-    {% endfor %}
-  </table>
+  <form method="post">
+    <table id="data" class="table table-striped">  
+      <tr>
+        <th> Song </th>
+        <th> Artist </th> 
+        <th> Genre </th> 
+        <th> Duration </th> 
+      </tr>
+      {% for song in songs %}
+        <tr class="clickable-row" id="{{song.song_id}}">
+          <td> {{ song.song }} </td>
+          <td> {{ artists[song.artist-1].artist }} </td>
+          <td> {{ genres[song.genre-1].genre }} </td>
+          <td> {{ song.duration }} </td>
+          <td> <button name="song_selected" value={{ song.song_id}} onclick="return value">Check Song</button> </td>
+        </tr>
+      {% endfor %}  
+    </table>
+  </form>
 {% endblock content %}
