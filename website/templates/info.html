@@ -7,6 +7,11 @@
 <p> {% print(artists[song.artist-1].artist) %}</p>
 <p> {% print(song.duration) %}</p>
 <p> {% print(albums[song.album-1].album) %}</p>
+
+<form method="post">
+  <button name="add_to_playlist" value={{ song.song_id }} onclick="return value"> add to playlist </button>
+</form>
+
 {% if song.lyrics %}
   <p> {% print(song.lyrics)%} </p>
 {% endif %}
