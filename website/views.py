@@ -34,7 +34,6 @@ def search():
   
   else:
     check_song = request.form.get('song_selected')
-    
     return redirect(url_for("views.info", song=check_song))
 
 
@@ -43,12 +42,24 @@ def search():
 def info(song):
   song_selected = Songs.query.filter(Songs.song_id == song).first()
   add_song = request.form.get('add_to_playlist')
-  if add_song:
+  if add_song: # song is being added to playlist
     print(add_song)
+    
   return render_template("info.html", user=current_user, song=song_selected, genres=Genres.query.all(), artists=Artists.query.all(), albums=Albums.query.all())
 
 
 @views.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-  return render_template("profile.html", user=current_user)
+  if request.method == "POST":
+    account = request.form.get('user_id')
+    return redirect(url_for("views.edit_profile", user_id=account))
+  
+  return render_template("profile.html", user=current_user, playlist=Playlists, songs_saved=Playlists_Songs)
+
+
+@views.route('/update/<user_id>', methods=['GET', 'POST'])
+@login_required
+def edit_profile(user_id):
+  print(user_id)
+  return render_template("edit_profile.html", user=current_user, playlist=Playlists, songs_saved=Playlists_Songs)

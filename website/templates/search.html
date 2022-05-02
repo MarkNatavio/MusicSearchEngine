@@ -53,15 +53,15 @@
       <th> Duration </th> 
     </tr>
     {% for song in songs %}
-      <tr>
-        <td> {{ song.song }} </td>
-        <td> {{ artists[song.artist-1].artist }} </td>
-        <td> {{ genres[song.genre-1].genre }} </td>
-        <td> {{ song.duration }} </td>
-        <form method="post">
+      <form method="post">
+        <tr>
+          <td> {{ song.song }} </td>
+          <td> {{ artists[song.artist-1].artist }} </td>
+          <td> {{ genres[song.genre-1].genre }} </td>
+          <td> {{ song.duration }} </td>  
           <td> <button name="song_selected" value={{ song.song_id }} onclick="return value">Check Song</button> </td>
-        </form>
-      </tr>
+        </tr>
+      </form>
     {% endfor %}  
   </table>
 {% endblock content %}
