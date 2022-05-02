@@ -19,28 +19,32 @@ def about():
 
 @views.route('/search', methods=['GET', 'POST'])
 @login_required
-def search():
-  chosen_genre = request.form.get('genre_button')
-  search_keyword = request.args.get('searchTextField')
-  testing = request.form.get('song_selected')
-  
-  songs_genre_filtered = Songs.query.all()  
+def search(): 
+  if request.method == "GET":
+    songs_filtered = Songs.query.all()
+    search_keyword = request.args.get('searchTextField')
+    chosen_genre = request.args.get('genre_id')
 
-  if testing: # go to song info
-    return info(testing)
-  elif chosen_genre: # search by genre
-    songs_genre_filtered = Songs.query.filter(Songs.genre == chosen_genre)
-  elif search_keyword: # search by keyword
-    songs_genre_filtered = Songs.query.filter(Songs.song.contains(search_keyword))
+    if chosen_genre: # search by genre
+      songs_filtered = Songs.query.filter(Songs.genre == chosen_genre)
+    elif search_keyword: # search by keyword
+      songs_filtered = Songs.query.filter(Songs.song.contains(search_keyword))
+    
+    return render_template("search.html", user=current_user, genres=Genres.query.all(), artists=Artists.query.all(), songs=songs_filtered)
   
-  
-  return render_template("search.html", user=current_user, genres=Genres.query.all(), artists=Artists.query.all(), songs=songs_genre_filtered)
+  else:
+    check_song = request.form.get('song_selected')
+    
+    return redirect(url_for("views.info", song=check_song))
 
 
-@views.route('/info', methods=['GET', 'POST'])
+@views.route('/info/song_id/<song>', methods=['GET', 'POST'])
 @login_required
-def info(id):
-  song_selected = Songs.query.filter(Songs.song_id == id).first()
+def info(song):
+  song_selected = Songs.query.filter(Songs.song_id == song).first()
+  add_song = request.form.get('add_to_playlist')
+  if add_song:
+    print(add_song)
   return render_template("info.html", user=current_user, song=song_selected, genres=Genres.query.all(), artists=Artists.query.all(), albums=Albums.query.all())
 
 
