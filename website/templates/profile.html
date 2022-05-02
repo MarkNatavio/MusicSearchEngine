@@ -7,12 +7,42 @@
   <div class="media">
     <div class="media-body">
       <h1> {{user.username}} </h1>
+      <h4> {{user.email}} </h4>
     </div>
   </div>
   
-  {% if user.bio != None %}
-  <h1> {{ user.bio }} </h1>
-  {% endif %}
+  <!-- {% if user.bio != None %} -->
+  <h1>Bio</h1>
+  <h4> {{ user.bio }} </h4>
+  <!-- {% endif %} -->
+
+  <hr/>
+  
+  <h3>Your Playlists</h3>
+  {% for playlist in playlists %}
+    <h1>playlist</h1>
+  {% endfor %}
+  <!--
+  <table id="data" class="table table-striped">  
+    <tr>
+      <th> Song </th>
+      <th> Artist </th> 
+      <th> Genre </th> 
+      <th> Duration </th> 
+    </tr>
+    {% for song in songs %}
+      <form method="post">
+        <tr>
+          <td> {{ song.song }} </td>
+          <td> {{ artists[song.artist-1].artist }} </td>
+          <td> {{ genres[song.genre-1].genre }} </td>
+          <td> {{ song.duration }} </td>  
+          <td> <button name="song_selected" value={{ song.song_id }} onclick="return value">Check Song</button> </td>
+        </tr>
+      </form>
+    {% endfor %}  
+  </table>
+  -->
 
   
 </div>
