@@ -31,8 +31,8 @@ CREATE TABLE Playlists(
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
--- Create Playlists_Songs Table - Contains playlists and the songs stored within them
-CREATE TABLE Playlists_Songs(
+-- Create PlaylistsSongs Table - Contains playlists and the songs stored within them
+CREATE TABLE PlaylistsSongs(
 	row_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
     song_id	INTEGER,
     playlist_id INTEGER,
