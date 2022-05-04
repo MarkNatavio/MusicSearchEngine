@@ -13,36 +13,35 @@
   
   <br/> 
   
-  <h1>Bio</h1>
+  <h2>Bio</h2>
   <h4> {{ user.bio }} </h4>
 
   <hr/>
   
-  <h3>Your Playlists</h3>
+  <h2>Your Playlists</h2>
   {% for playlist in playlists %}
-    <h1>playlist</h1>
+    <h5>{{ playlist.playlist_name }}</h5>
+    <table id="data" class="table table-striped">  
+      <tr>
+        <th> Song </th>
+        <th> Artist </th> 
+        <th> Genre </th> 
+        <th> Duration </th> 
+      </tr>
+      {% for item in playlist_songs %}
+        {% for song in songs %}
+          {% if song.song_id == item.song_id %}
+            <tr>
+              <td> {{ songs.song }} </td>
+              <td> {{ artists[song.artist-1].artist }} </td>
+              <td> {{ genres[song.genre-1].genre }} </td>
+              <td> {{ song.duration }} </td> 
+            </tr>
+          {% endif %}
+        {% endfor %} 
+      {% endfor %} 
+    </table>
   {% endfor %}
-  <!--
-  <table id="data" class="table table-striped">  
-    <tr>
-      <th> Song </th>
-      <th> Artist </th> 
-      <th> Genre </th> 
-      <th> Duration </th> 
-    </tr>
-    {% for song in songs %}
-      <form method="post">
-        <tr>
-          <td> {{ song.song }} </td>
-          <td> {{ artists[song.artist-1].artist }} </td>
-          <td> {{ genres[song.genre-1].genre }} </td>
-          <td> {{ song.duration }} </td>  
-          <td> <button name="song_selected" value={{ song.song_id }} onclick="return value">Check Song</button> </td>
-        </tr>
-      </form>
-    {% endfor %}  
-  </table>
-  -->
 
   
 </div>
