@@ -45,13 +45,15 @@ def info(song):
   user_playlist_id = Playlists.query.filter(Playlists.user_id==current_user.user_id).first().playlist_id
   
   if add_song_id: # song is being added to playlist
-    new_playlist_song = Content(playlist_id=int(user_playlist_id), song_id=int(add_song_id))
-    db.session.add(new_playlist_song)
-    db.session.commit()
-    
-    print(new_playlist_song)
-    flash('Song added to Favorites!', category='success')
-    
+    if Content.query.filter(Content.playlist_id==int(user_playlist_id), Content.song_id==int(add_song_id)).first() is None: # check if song already in playlist 
+      new_playlist_song = Content(playlist_id=int(user_playlist_id), song_id=int(add_song_id))
+      db.session.add(new_playlist_song)
+      db.session.commit()
+
+      flash('Song added to Favorites!', category='success')
+      
+    else: # song already in playlist
+      flash('This song is already on your playlist', category='error')
     
   return render_template("info.html", user=current_user, song=song_selected, genres=Genres.query.all(), artists=Artists.query.all(), albums=Albums.query.all())
 
