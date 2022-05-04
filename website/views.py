@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, request, flash, jsonify, redirect,
 from flask_login import login_required, current_user
 from . import db
 import json
-from .models import Artists, Playlists, Playlists_Songs, Genres, Songs, Albums
+from .models import Artists, Playlists, PlaylistsSongs, Genres, Songs, Albums
 
 views = Blueprint('views', __name__)
 
@@ -55,10 +55,10 @@ def profile():
   if request.method == "POST":
     return redirect(url_for("views.edit_profile", id=account))
   
-  return render_template("profile.html", user=current_user, playlist=Playlists.query.filter(Playlists.user_id == account), songs_saved=Playlists_Songs.query.filter(Playlists_Songs.song_id == Songs.song_id))
+  return render_template("profile.html", user=current_user, playlist=Playlists.query.filter(Playlists.user_id == account), songs_saved=PlaylistsSongs.query.filter(PlaylistsSongs.song_id == Songs.song_id))
 
 
 @views.route('/update/user/<id>', methods=['GET', 'POST'])
 @login_required
 def edit_profile(id):
-  return render_template("edit_profile.html", user=current_user, playlist=Playlists.query.filter(Playlists.user_id == id), songs_saved=Playlists_Songs.query.filter(Playlists_Songs.song_id == Songs.song_id))
+  return render_template("edit_profile.html", user=current_user, playlist=Playlists.query.filter(Playlists.user_id == id), songs_saved=PlaylistsSongs.query.filter(PlaylistsSongs.song_id == Songs.song_id))
