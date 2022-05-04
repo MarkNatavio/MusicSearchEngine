@@ -61,14 +61,14 @@ def info(song):
 @views.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-  account = request.form.get('user_id')
+  account = current_user.user_id
   if request.method == "POST":
     return redirect(url_for("views.edit_profile", id=account))
   
-  return render_template("profile.html", user=current_user, playlist=Playlists.query.filter(Playlists.user_id == account))#, songs_saved=PlaylistsSongs.query.filter(PlaylistsSongs.song_id == Songs.song_id))
+  return render_template("profile.html", user=current_user, playlists=Playlists.query.filter(Playlists.user_id == account), songs=Songs.query.all(), playlist_songs=Content.query.all(), genres=Genres.query.all(), artists=Artists.query.all(), albums=Albums.query.all())
 
 
 @views.route('/update/user/<id>', methods=['GET', 'POST'])
 @login_required
 def edit_profile(id):
-  return render_template("edit_profile.html", user=current_user, playlist=Playlists.query.filter(Playlists.user_id == id))#, songs_saved=PlaylistsSongs.query.filter(PlaylistsSongs.song_id == Songs.song_id))
+  return render_template("edit_profile.html", user=current_user, playlists=Playlists.query.filter(Playlists.user_id == id))#, songs_saved=PlaylistsSongs.query.filter(PlaylistsSongs.song_id == Songs.song_id))
