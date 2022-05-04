@@ -32,7 +32,7 @@ CREATE TABLE Playlists(
 );
 
 -- Create PlaylistsSongs Table - Contains playlists and the songs stored within them
-CREATE TABLE PlaylistsSongs(
+CREATE TABLE Content(
 	row_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
     song_id	INTEGER,
     playlist_id INTEGER,

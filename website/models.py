@@ -46,9 +46,8 @@ class Playlists(db.Model):
   playlist_id = db.Column(db.Integer, primary_key=True)
   playlist_name = db.Column(db.String(255))
   user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-
   
-class PlaylistsSongs(db.Model):
+class Content(db.Model):
   row_id = db.Column(db.Integer, primary_key=True)
   song_id = db.Column(db.Integer, db.ForeignKey('songs.song_id'))
   playlist_id = db.Column(db.Integer, db.ForeignKey('playlists.playlist_id'))

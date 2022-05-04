@@ -8,7 +8,7 @@
 <p> {% print(song.duration) %}</p>
 <p> {% print(albums[song.album-1].album) %}</p>
 
-<form method="post">
+<form method="get">
   <button name="add_to_playlist" value={{ song.song_id }} onclick="return value"> add to playlist </button>
 </form>
 

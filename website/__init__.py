@@ -22,7 +22,7 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
     
-    from .models import Users, Songs, Artists, Genres, Albums, Playlists, PlaylistsSongs
+    from .models import Users, Songs, Artists, Genres, Albums, Playlists, Content
     
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
