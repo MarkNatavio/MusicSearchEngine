@@ -28,17 +28,19 @@
         <th> Genre </th> 
         <th> Duration </th> 
       </tr>
-      {% for item in playlist_songs %}
-        {% for song in songs %}
-          {% if song.song_id == item.song_id %}
-            <tr>
-              <td> {{ songs.song }} </td>
-              <td> {{ artists[song.artist-1].artist }} </td>
-              <td> {{ genres[song.genre-1].genre }} </td>
-              <td> {{ song.duration }} </td> 
-            </tr>
-          {% endif %}
-        {% endfor %} 
+      {% for item in content %}
+        {% if item.playlist_id == playlist.playlist_id %}
+          {% for song in songs %}
+            {% if song.song_id == item.song_id %}
+              <tr>
+                <td> {{ song.song }} </td>
+                <td> {{ artists[song.artist-1].artist }} </td>
+                <td> {{ genres[song.genre-1].genre }} </td>
+                <td> {{ song.duration }} </td> 
+              </tr>
+            {% endif %}
+          {% endfor %} 
+        {% endif %}
       {% endfor %} 
     </table>
   {% endfor %}

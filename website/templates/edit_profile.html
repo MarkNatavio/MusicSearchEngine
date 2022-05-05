@@ -3,4 +3,52 @@
 
 {% block content%}
   <h1>Edit Profile</h1>
+  
+  <fieldset>
+    <form class="form-inline my-2 my-lg-0" method="get">
+      <legend>Username</legend>
+      <input class="form-control mr-sm-2" placeholder={{user.username}} name="new_username">
+      
+      <legend><br/>Email</legend>
+      <input class="form-control mr-sm-2" placeholder={{user.email}} name="new_email">
+      
+      <legend><br/>Bio</legend>
+      <input class="form-control mr-sm-2" placeholder={{user.bio}} name="new_bio">
+      
+      <legend></legend>
+      <button class="btn btn-outline btn-info" name="save_changes">Save Changes</button>
+    </form>
+  </fieldset>
+
+  <hr/>
+
+  <h2>Edit Playlists</h2>
+  {% for playlist in playlists %}
+    <h5>{{ playlist.playlist_name }}</h5>
+    <table id="data" class="table table-striped">  
+      <tr>
+        <th> Song </th>
+        <th> Artist </th> 
+        <th> Genre </th> 
+        <th> Duration </th> 
+      </tr>
+      {% for item in content %}
+        {% if item.playlist_id == playlist.playlist_id %}
+          {% for song in songs %}
+            {% if song.song_id == item.song_id %}
+              <tr>
+                <td> {{ song.song }} </td>
+                <td> {{ artists[song.artist-1].artist }} </td>
+                <td> {{ genres[song.genre-1].genre }} </td>
+                <td> {{ song.duration }} </td> 
+                <form method="get">
+                  <td> <button name="song_to_delete" value={{ playlist.playlist_id }}{{ song.song_id }} onclick="return value">Delete Song</button> </td>
+                </form>
+              </tr>
+            {% endif %}
+          {% endfor %} 
+        {% endif %}
+      {% endfor %} 
+    </table>
+  {% endfor %}
 {% endblock %}

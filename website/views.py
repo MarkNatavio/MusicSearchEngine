@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, request, flash, jsonify, redirect,
 from flask_login import login_required, current_user
 from . import db
 import json
-from .models import Artists, Playlists, Genres, Songs, Albums, Content
+from .models import Artists, Playlists, Genres, Songs, Albums, Content, Users
 
 views = Blueprint('views', __name__)
 
@@ -40,20 +40,21 @@ def search():
 @views.route('/info/song_id/<song>', methods=['GET', 'POST'])
 @login_required
 def info(song):
-  song_selected = Songs.query.filter(Songs.song_id == song).first()
-  add_song_id = request.args.get('add_to_playlist')
-  user_playlist_id = Playlists.query.filter(Playlists.user_id==current_user.user_id).first().playlist_id
-  
-  if add_song_id: # song is being added to playlist
-    if Content.query.filter(Content.playlist_id==int(user_playlist_id), Content.song_id==int(add_song_id)).first() is None: # check if song already in playlist 
-      new_playlist_song = Content(playlist_id=int(user_playlist_id), song_id=int(add_song_id))
-      db.session.add(new_playlist_song)
-      db.session.commit()
+  if request.method == "GET":
+    song_selected = Songs.query.filter(Songs.song_id == song).first()
+    add_song_id = request.args.get('add_to_playlist')
+    user_playlist_id = Playlists.query.filter(Playlists.user_id==current_user.user_id).first().playlist_id
+    
+    if add_song_id: # song is being added to playlist
+      if Content.query.filter(Content.playlist_id==int(user_playlist_id), Content.song_id==int(add_song_id)).first() is None: # check if song already in playlist 
+        new_playlist_song = Content(playlist_id=int(user_playlist_id), song_id=int(add_song_id))
+        db.session.add(new_playlist_song)
+        db.session.commit()
 
-      flash('Song added to Favorites!', category='success')
-      
-    else: # song already in playlist
-      flash('This song is already on your playlist', category='error')
+        flash('Song added to Favorites!', category='success')
+        
+      else: # song already in playlist
+        flash('This song is already on your playlist', category='error')
     
   return render_template("info.html", user=current_user, song=song_selected, genres=Genres.query.all(), artists=Artists.query.all(), albums=Albums.query.all())
 
@@ -65,10 +66,76 @@ def profile():
   if request.method == "POST":
     return redirect(url_for("views.edit_profile", id=account))
   
-  return render_template("profile.html", user=current_user, playlists=Playlists.query.filter(Playlists.user_id == account), songs=Songs.query.all(), playlist_songs=Content.query.all(), genres=Genres.query.all(), artists=Artists.query.all(), albums=Albums.query.all())
+  return render_template("profile.html", user=current_user, playlists=Playlists.query.filter(Playlists.user_id == account), content=Content.query.all(), songs=Songs.query.all(), genres=Genres.query.all(), artists=Artists.query.all(), albums=Albums.query.all())
 
 
-@views.route('/update/user/<id>', methods=['GET', 'POST'])
+@views.route('/update_user/<id>', methods=['GET', 'POST'])
 @login_required
 def edit_profile(id):
-  return render_template("edit_profile.html", user=current_user, playlists=Playlists.query.filter(Playlists.user_id == id))#, songs_saved=PlaylistsSongs.query.filter(PlaylistsSongs.song_id == Songs.song_id))
+  if int(id) != int(current_user.user_id): # do not allow other users to edit someone else's page
+    flash('You cannot access this page', category='error')
+    return redirect(url_for("views.home", user=current_user))
+  
+  else: # allow current user to edit their own pag      
+    new_username = current_user.username
+    new_email = current_user.email
+    new_bio = current_user.bio
+    #new_password = current_user.password
+    
+    if request.method == "GET":
+      delete_vals = request.args.get('song_to_delete')
+      if delete_vals: # delete songs in playlist
+        delete_playlist_id = delete_vals[0]
+        delete_song_id = delete_vals[1]
+        entry_to_delete = Content.query.filter(Content.playlist_id==int(delete_playlist_id), Content.song_id==int(delete_song_id)).first()
+        db.session.delete(entry_to_delete)
+        db.session.commit()
+        
+        return render_template("edit_profile.html", user=current_user, playlists=Playlists.query.filter(Playlists.user_id == id), content=Content.query.all(), songs=Songs.query.all(), genres=Genres.query.all(), artists=Artists.query.all(), albums=Albums.query.all())
+        
+      else: # update info
+        new_username = request.args.get('new_username')
+        new_email = request.args.get('new_email')
+        new_bio = request.args.get('new_bio')
+        # new_password = request.args.get('new_password')
+        acceptable = 1
+      
+        if new_username:
+          user = Users.query.filter(Users.user_id == current_user.user_id).first()
+          user.username = new_username
+          db.session.commit()
+          acceptable = 2
+          
+        if new_email:
+          account = Users.query.filter_by(email=new_email).first()
+          if account and new_email!=current_user.email:
+            acceptable = 0
+            flash('There is already an account with this email.', category='error')
+          elif len(new_email) < 4:
+            acceptable = 0
+            flash('Invalid email address. Email address must follow \'email@example.com\' format.', category='error')
+          else:
+            user = Users.query.filter(Users.user_id == current_user.user_id).first()
+            user.email = new_email
+            db.session.commit()
+            acceptable = 2
+          
+        # if new_password:
+        #   user = Users.query.filter(Users.user_id == current_user.user_id).first()
+        #   user.password = new_password
+        #   db.session.commit()
+        #   acceptable = 2
+          
+        if new_bio:
+          user = Users.query.filter(Users.user_id == current_user.user_id).first()
+          user.bio = new_bio
+          db.session.commit()
+          acceptable = 2
+        
+        if acceptable == 2:
+          flash('Changes have been saved!', category='successs')
+          return redirect(url_for("views.profile", user=current_user))
+        
+        else:
+          return render_template("edit_profile.html", user=current_user, playlists=Playlists.query.filter(Playlists.user_id == id), content=Content.query.all(), songs=Songs.query.all(), genres=Genres.query.all(), artists=Artists.query.all(), albums=Albums.query.all())
+      
