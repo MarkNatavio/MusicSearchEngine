@@ -85,13 +85,12 @@ def edit_profile(id):
     if request.method == "GET":
       delete_vals = request.args.get('song_to_delete')
       if delete_vals: # delete songs in playlist
-        delete_playlist_id = delete_vals[0]
-        delete_song_id = delete_vals[1]
-        entry_to_delete = Content.query.filter(Content.playlist_id==int(delete_playlist_id), Content.song_id==int(delete_song_id)).first()
+        arr = delete_vals.split(',')
+        delete_playlist_id = int(arr[0])
+        delete_song_id = int(arr[1])
+        entry_to_delete = Content.query.filter(Content.playlist_id==delete_playlist_id, Content.song_id==delete_song_id).first()
         db.session.delete(entry_to_delete)
         db.session.commit()
-        
-        return render_template("edit_profile.html", user=current_user, playlists=Playlists.query.filter(Playlists.user_id == id), content=Content.query.all(), songs=Songs.query.all(), genres=Genres.query.all(), artists=Artists.query.all(), albums=Albums.query.all())
         
       else: # update info
         new_username = request.args.get('new_username')
@@ -134,8 +133,7 @@ def edit_profile(id):
         
         if acceptable == 2:
           flash('Changes have been saved!', category='successs')
-          return redirect(url_for("views.profile", user=current_user))
         
-        else:
-          return render_template("edit_profile.html", user=current_user, playlists=Playlists.query.filter(Playlists.user_id == id), content=Content.query.all(), songs=Songs.query.all(), genres=Genres.query.all(), artists=Artists.query.all(), albums=Albums.query.all())
+        
+    return render_template("edit_profile.html", user=current_user, playlists=Playlists.query.filter(Playlists.user_id == id), content=Content.query.all(), songs=Songs.query.all(), genres=Genres.query.all(), artists=Artists.query.all(), albums=Albums.query.all())
       
