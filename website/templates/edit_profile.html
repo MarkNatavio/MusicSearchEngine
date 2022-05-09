@@ -1,5 +1,5 @@
 {% extends "base.html" %} 
-{% block title %}Dashboard{% endblock %} 
+{% block title %}Edit Profile{% endblock %} 
 
 {% block content%}
   <h1>Edit Profile</h1>
@@ -42,7 +42,7 @@
                 <td> {{ genres[song.genre-1].genre }} </td>
                 <td> {{ song.duration }} </td> 
                 <form method="get">
-                  <td> <button name="song_to_delete" value={{ playlist.playlist_id }}{{ song.song_id }} onclick="return value">Delete Song</button> </td>
+                  <td> <button name="song_to_delete" value={{ playlist.playlist_id }},{{ song.song_id }} onclick="return value">Delete Song</button> </td>
                 </form>
               </tr>
             {% endif %}
