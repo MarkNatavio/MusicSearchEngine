@@ -1,10 +1,206 @@
-{% extends 'base.html' %}
-{% block title %}About{% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
 
-{% block content %}
-<h1>ABOUT PAGE</h1>
-<p>TALK ABOUT WHAT THE APPLICATION IS ALL ABOUT</p>
-<hr/>
-<h1>HOW TO NAVIGATE?</h1>
-<p>TALK ABOUT HOW TO NAVIGATE THROUGH THE APPLICATION</p>
-{% endblock content %}
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.column {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+/* .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 8px;
+} */
+
+.card {
+  padding: 16px;
+  text-align: center;
+}
+
+.about-section {
+  padding: 50px;
+  text-align: left;
+  
+  /* background-color: #313336;
+  color: white; */
+}
+
+.navigation-section {
+  padding: 50px;
+  text-align: center;
+  background-color:  #474e5d;
+  color: white;
+}
+
+.container {
+  padding: 0 16px;
+}
+
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.title {
+  color: grey;
+}
+
+.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: #555;
+}
+
+.tab1cards {
+  display: flex;
+  flex-direction: row;
+  
+}
+
+.column {
+  float: left;
+  width: 25%;
+  padding-right:100px;
+
+}
+
+.h2{
+    color:rgb(25, 25, 86);
+    font-family: 'Brush Script MT', cursive;
+    font-size: xx-large;
+  }
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+  
+
+}
+
+.bgImgCenter{
+    background-image: url('images/bhalo.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 120%;
+    opacity: 1.0;
+    /* background-position: center; 
+    position: relative; */
+}
+
+
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+
+}
+</style>
+</head>
+<body>
+
+<div class="bgImgCenter">
+<div class="about-section">
+  <!-- <background-image>: url("images/about.jpg");</background-image> -->
+
+    
+
+  <h1 style="color:rgb(244, 239, 239)">About Us</h1>
+  <p style="color:white">MUSF is a music recommendation application that recommends new songs to users based on their music taste. The dataset of the songs has been divided into four tables: Song table,
+    Album table, Genres table, and Artists table. These tables interact with 
+      each other curating playlists according to the users' choices. The purpose 
+        of this application is to allow users to find new music based on their taste
+          by providing related songs based on genre or title or find songs too. 
+            We are designing the app to combine our database skills and improve our web application design skills. 
+    </p>
+</div>
+</div>
+
+
+
+<div class="h2">
+<h2 style="text-align:center">Our  Team</h2>
+</div>
+
+<div class="tab1cards">
+<div class="row">
+  <div class="column">
+    <div class="card">
+      <div class="container">
+        <h2>Mark Natavio</h2>
+        <p>mnatavi000@citymail.cuny.edu</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+      <div class="container">
+        <h2>Farnaz Zinnah</h2>
+        <p>fzinnah000@citymail.cuny.edu</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="column">
+    <div class="card">
+      <div class="container">
+        <h2>Uzmabanu Kapadia</h2>
+        <p>ukapadi000@citymail.cuny.edu</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="column">
+    <div class="card">
+      <div class="container">
+        <h2>Sadia Chowdhury</h2>
+        <p>schowdh025@citymail.cuny.edu</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class="navigation-section">
+    <h1>Navigating Our App</h1>
+    <p>Go to the search page to find new music. 
+    Select a Genre or search a song by Keyword. 
+    Click on the song of your choosing and add it to a playlist. 
+    Loving the playlist?
+    You can make more on your profile page</p>
+  </div>
+
+</body>
+</html>
