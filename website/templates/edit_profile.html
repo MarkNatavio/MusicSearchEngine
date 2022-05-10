@@ -1,7 +1,17 @@
 {% extends "base.html" %} 
 {% block title %}Dashboard{% endblock %} 
 
-{% block content%}
+
+{% block edit_profile %}
+
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../static/css/editprofile.css" />
+</head>
+
   <h1>Edit Profile</h1>
   
   <fieldset>
@@ -15,7 +25,9 @@
       <legend><br/>Bio</legend>
       <input class="form-control mr-sm-2" placeholder={{user.bio}} name="new_bio">
       
-      <legend></legend>
+      
+      <legend><br/></legend>
+      
       <button class="btn btn-outline btn-info" name="save_changes">Save Changes</button>
     </form>
   </fieldset>
@@ -30,7 +42,8 @@
         <th> Song </th>
         <th> Artist </th> 
         <th> Genre </th> 
-        <th> Duration </th> 
+        <th> Duration </th>
+        <th> Remove </th> 
       </tr>
       {% for item in content %}
         {% if item.playlist_id == playlist.playlist_id %}

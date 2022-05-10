@@ -76,7 +76,7 @@ def edit_profile(id):
     flash('You cannot access this page', category='error')
     return redirect(url_for("views.home", user=current_user))
   
-  else: # allow current user to edit their own pag      
+  else: # allow current user to edit their own page      
     new_username = current_user.username
     new_email = current_user.email
     new_bio = current_user.bio

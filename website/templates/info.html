@@ -1,12 +1,23 @@
 {% extends 'base.html' %}
 {% block title %}Info{% endblock %}
 
-{% block content %}
-<h1> {% print(song.song) %}</h1>
+{% block details %} 
+
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../static/assets/info-assets/main.css"/>
+</head>
+{% endblock %}
+{% block content %} 
+<h1> {% print(song.song) %}</h1> 
 <p> {% print(genres[song.genre-1].genre) %}</p>
 <p> {% print(artists[song.artist-1].artist) %}</p>
 <p> {% print(song.duration) %}</p>
 <p> {% print(albums[song.album-1].album) %}</p>
+<h3 class = "namefirst1"> Farnaz Zinnah </h3>
 
 <form method="get">
   <button name="add_to_playlist" value={{ song.song_id }} onclick="return value"> add to playlist </button>
@@ -15,4 +26,5 @@
 {% if song.lyrics %}
   <p> {% print(song.lyrics)%} </p>
 {% endif %}
+
 {% endblock content %}

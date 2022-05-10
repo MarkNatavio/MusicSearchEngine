@@ -10,7 +10,7 @@ def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'nabhjkdsvuscbhkjnkbfacjk akavssdoib j'
     
-    connection = "mysql+pymysql://{0}:{1}@{2}/{3}".format('root', 'password1234', 'localhost', 'MusicDB', pool_size=25, max_overflow=0)
+    connection = "mysql+pymysql://{0}:{1}@{2}/{3}".format('root', 'password1234', 'localhost', 'MusicDB', pool_size=40, max_overflow=0)
     app.config['SQLALCHEMY_DATABASE_URI'] = connection    
     
     db = SQLAlchemy(app)

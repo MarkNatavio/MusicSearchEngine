@@ -2,27 +2,18 @@
 {% block title %}Search{% endblock %}
 
 {% block details %} 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-  table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  td, form:th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
-  </style>
+
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../static/assets/searchpage-assets/css/main.css" />
+</head>
 {% endblock %}
 
-{% block content %}
+{% block searchpage %}
+<br>
   <fieldset>
     <legend>WHAT ARE YOU LOOKING FOR?</legend>
     <form class="form-inline my-2 my-lg-0" method="get">
@@ -42,15 +33,14 @@
       </div>
     </div>
   </form>
-  
-  <hr/>
 
   <table id="data" class="table table-striped">  
     <tr>
       <th> Song </th>
       <th> Artist </th> 
       <th> Genre </th> 
-      <th> Duration </th> 
+      <th> Duration </th>
+      <th> Check it out </th> 
     </tr>
     {% for song in songs %}
       <form method="post">
@@ -64,4 +54,4 @@
       </form>
     {% endfor %}  
   </table>
-{% endblock content %}
+{% endblock searchpage %}
