@@ -127,11 +127,6 @@ q:after {
   content: none;
 }
 
-table {
-  
-  
-}
-
 body {
   -webkit-text-size-adjust: none;
 }
@@ -200,7 +195,7 @@ body {
 
 body {
   font-family: "Open Sans", sans-serif;
-  background: linear-gradient(to right, rgba(89, 135, 158, 0.8), rgba(108, 156, 179, 0.6)), url("/website/static/images/backgroundhome.jpg");
+  background: linear-gradient(to right, rgba(89, 135, 158, 0.8), rgba(108, 156, 179, 0.6)), url("../images/backgroundhome.jpg");
   display: -moz-flex;
   display: -webkit-flex;
   display: -ms-flex;
@@ -234,23 +229,6 @@ body>* {
   z-index: 2;
 }
 
-/* @media screen and (max-width: 1680px) {
-  body {
-    padding: 6em 3.5em 3.5em 3.5em;
-  }
-}
-
-@media screen and (max-width: 736px) {
-  body {
-    padding: 5em 2em 2em 2em;
-  }
-}
-
-@media screen and (max-width: 360px) {
-  body {
-    padding: 5em 1.25em 1.25em 1.25em;
-  }
-} */
 
 /* BG */
 #bg {
@@ -283,27 +261,37 @@ body>* {
 }
 
 #bg div.visible {
-      -moz-animation: bg 45s linear infinite;
-      -webkit-animation: bg 45s linear infinite;
-      -ms-animation: bg 45s linear infinite;
-      animation: bg 45s linear infinite;
-      opacity: 1;
-      visibility: visible;
-      z-index: 1; }
-      #bg div.visible.top {
-        z-index: 2; }
-      @media screen and (max-width: 1280px) {
-        #bg div.visible {
-          -moz-animation: bg 29.25s linear infinite;
-          -webkit-animation: bg 29.25s linear infinite;
-          -ms-animation: bg 29.25s linear infinite;
-          animation: bg 29.25s linear infinite; } }
-      @media screen and (max-width: 736px) {
-        #bg div.visible {
-          -moz-animation: bg 18s linear infinite;
-          -webkit-animation: bg 18s linear infinite;
-          -ms-animation: bg 18s linear infinite;
-          animation: bg 18s linear infinite; } }
+  -moz-animation: bg 45s linear infinite;
+  -webkit-animation: bg 45s linear infinite;
+  -ms-animation: bg 45s linear infinite;
+  animation: bg 45s linear infinite;
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+
+#bg div.visible.top {
+  z-index: 2;
+}
+
+@media screen and (max-width: 1280px) {
+  #bg div.visible {
+    -moz-animation: bg 29.25s linear infinite;
+    -webkit-animation: bg 29.25s linear infinite;
+    -ms-animation: bg 29.25s linear infinite;
+    animation: bg 29.25s linear infinite;
+  }
+}
+
+@media screen and (max-width: 736px) {
+  #bg div.visible {
+    -moz-animation: bg 18s linear infinite;
+    -webkit-animation: bg 18s linear infinite;
+    -ms-animation: bg 18s linear infinite;
+    animation: bg 18s linear infinite;
+  }
+}
+
 #bg div:only-child {
   -moz-animation-direction: alternate !important;
   -webkit-animation-direction: alternate !important;
@@ -1222,7 +1210,7 @@ hr {
 
 #data {
   margin-left: auto;
-	margin-right: auto;
+  margin-right: auto;
   width: 70%;
   color: white;
 
@@ -1234,13 +1222,14 @@ form {
   padding-left: 7em;
 }
 
-.table td, .table th {
+.table td,
+.table th {
   padding: .75rem;
   vertical-align: top;
   border-top: 1px solid #dee2e6;
   text-align: center;
 }
 
-a{
+a {
   text-decoration: none;
 }

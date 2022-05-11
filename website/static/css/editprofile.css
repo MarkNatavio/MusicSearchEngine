@@ -200,7 +200,7 @@ body {
 
 body {
     font-family: "Open Sans", sans-serif;
-    background: linear-gradient(to right, rgba(89, 135, 158, 0.8), rgba(108, 156, 179, 0.6)), url("/website/static/images/backgroundhome.jpg");
+    background: linear-gradient(to right, rgba(89, 135, 158, 0.8), rgba(108, 156, 179, 0.6)), url("../images/backgroundhome.jpg");
     display: -moz-flex;
     display: -webkit-flex;
     display: -ms-flex;
@@ -234,23 +234,6 @@ body>* {
     z-index: 2;
 }
 
-/* @media screen and (max-width: 1680px) {
-  body {
-    padding: 6em 3.5em 3.5em 3.5em;
-  }
-}
-
-@media screen and (max-width: 736px) {
-  body {
-    padding: 5em 2em 2em 2em;
-  }
-}
-
-@media screen and (max-width: 360px) {
-  body {
-    padding: 5em 1.25em 1.25em 1.25em;
-  }
-} */
 
 /* BG */
 #bg {

@@ -5,34 +5,35 @@
 
 <html>
 
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-  <link rel="stylesheet" href="../static/assets/profile-assets/css/main.css" />
+  <link rel="stylesheet" href="../static/css/profile-main.css" />
 </head>
 
-<body class="is-preload">
+<body>
 
   <div class="content-section">
-    <div class = "content-pad">
-    <div class="media">
-      <div class="media-body">
-        <h1> {{user.username}} </h1>
-        <h4> {{user.email}} </h4>
+    <div class="content-pad">
+      <div class="media">
+        <div class="media-body">
+          <h1> {{user.username}} </h1>
+          <h4> {{user.email}} </h4>
+        </div>
       </div>
+
+      <br />
+
+      <h2>Bio</h2>
+      <h4> {{ user.bio }} </h4>
+
+      <hr />
+
+      <h2>Your Playlists</h2>
+      {% for playlist in playlists %}
+      <h5>{{ playlist.playlist_name }}</h5>
     </div>
-
-    <br />
-
-    <h2>Bio</h2>
-    <h4> {{ user.bio }} </h4>
-
-    <hr />
-
-    <h2>Your Playlists</h2>
-    {% for playlist in playlists %}
-    <h5>{{ playlist.playlist_name }}</h5>
-  </div>
     <table id="data" class="table table-striped">
       <tr>
         <th> Song </th>
@@ -56,17 +57,13 @@
       {% endfor %}
     </table>
     {% endfor %}
-
-
+    <form method="post">
+      <button name="user_id" value="{{user.user_id}}"> Edit Profile </button>
+    </form>
   </div>
-  <form method="post">
-    <button name="user_id" value="{{user.user_id}}"> Edit Profile </button>
-  </form>
-
 </body>
 
 </html>
-
 
 {% endblock %}
 
