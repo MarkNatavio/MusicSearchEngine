@@ -1,55 +1,80 @@
-{% extends "base.html" %} 
-{% block title %}Profile{% endblock %} 
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
 
-{% block content%}
+{% block profilepage %}
 
-<div class="content-section">
-  <div class="media">
-    <div class="media-body">
-      <h1> {{user.username}} </h1>
-      <h4> {{user.email}} </h4>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="../static/assets/profile-assets/css/main.css" />
+</head>
+
+<body class="is-preload">
+
+  <div class="content-section">
+    <div class = "content-pad">
+    <div class="media">
+      <div class="media-body">
+        <h1> {{user.username}} </h1>
+        <h4> {{user.email}} </h4>
+      </div>
     </div>
-  </div>
-  
-  <br/> 
-  
-  <h2>Bio</h2>
-  <h4> {{ user.bio }} </h4>
 
-  <hr/>
-  
-  <h2>Your Playlists</h2>
-  {% for playlist in playlists %}
+    <br />
+
+    <h2>Bio</h2>
+    <h4> {{ user.bio }} </h4>
+
+    <hr />
+
+    <h2>Your Playlists</h2>
+    {% for playlist in playlists %}
     <h5>{{ playlist.playlist_name }}</h5>
-    <table id="data" class="table table-striped">  
+  </div>
+    <table id="data" class="table table-striped">
       <tr>
         <th> Song </th>
-        <th> Artist </th> 
-        <th> Genre </th> 
-        <th> Duration </th> 
+        <th> Artist </th>
+        <th> Genre </th>
+        <th> Duration </th>
       </tr>
       {% for item in content %}
-        {% if item.playlist_id == playlist.playlist_id %}
-          {% for song in songs %}
-            {% if song.song_id == item.song_id %}
-              <tr>
-                <td> {{ song.song }} </td>
-                <td> {{ artists[song.artist-1].artist }} </td>
-                <td> {{ genres[song.genre-1].genre }} </td>
-                <td> {{ song.duration }} </td> 
-              </tr>
-            {% endif %}
-          {% endfor %} 
-        {% endif %}
-      {% endfor %} 
+      {% if item.playlist_id == playlist.playlist_id %}
+      {% for song in songs %}
+      {% if song.song_id == item.song_id %}
+      <tr>
+        <td> {{ song.song }} </td>
+        <td> {{ artists[song.artist-1].artist }} </td>
+        <td> {{ genres[song.genre-1].genre }} </td>
+        <td> {{ song.duration }} </td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+      {% endfor %}
     </table>
-  {% endfor %}
+    {% endfor %}
 
-  
-</div>
-<form method="post">
-<button name="user_id" value="{{user.user_id}}"> Edit Profile </button>
-</form>
+
+  </div>
+  <form method="post">
+    <button name="user_id" value="{{user.user_id}}"> Edit Profile </button>
+  </form>
+
+</body>
+
+</html>
 
 
 {% endblock %}
+
+
+
+<!--
+	Eventually by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<!--  -->
