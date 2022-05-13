@@ -13,16 +13,19 @@
 {% endblock %}
 {% block content %} 
 <h1> {% print(song.song) %}</h1> 
-<p> {% print(genres[song.genre-1].genre) %}</p>
-<p> {% print(artists[song.artist-1].artist) %}</p>
-<p> {% print(song.duration) %}</p>
-<p> {% print(albums[song.album-1].album) %}</p>
+<p> Genre: {% print(genres[song.genre-1].genre) %}</p>
+<p> Artist: {% print(artists[song.artist-1].artist) %}</p>
+<p> Duration: {% print(song.duration) %}</p>
+<p> Album: {% print(albums[song.album-1].album) %}</p>
 
 <form method="get">
   <button name="add_to_playlist" value={{ song.song_id }} onclick="return value"> add to playlist </button>
 </form>
 
+<br/>
+
 {% if song.lyrics %}
+  <h3> Lyrics </h3>
   <p> {% print(song.lyrics)%} </p>
 {% endif %}
 
