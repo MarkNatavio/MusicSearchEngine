@@ -26,4 +26,6 @@ Users must create a new MySQL connection if they do not have one already. After 
 
 To run this application download the GitHub Repository and open MySQL Workbench and run the MusicDB.sql file. This should generate a new schema in MySQL Workbench called MusicDB. Additionally, 52 entries will be inserted into the Songs table. Now, users can begin to run the application by opening the main.py file and running it on Visual Studio Code. If the terminal is causing some issues, try debugging the main.py file. Additional assitance is to select the Visual Studio Python environment to be an anaconda gloabl environment.
 
-Finally, open the http location stated in the terminal. The navigational instrucitons are located in the About Page.
+Open the http location stated in the terminal. The navigational instrucitons are located in the About Page.
+
+If accessing the profile edit page gives users an error, simply refresh the page and it should work accordingly.
